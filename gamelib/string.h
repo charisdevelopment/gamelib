@@ -78,26 +78,32 @@ namespace glib {
 		}
 
 		//========================================================
-		bool operator == (const GLibString & str) {
+		inline bool operator == (const GLibString & str) {
 			return strcmp( m_str, str.c_str() ) == 0;
 		}
 
 		//========================================================
-		bool operator != (const GLibString & str) {
+		inline bool operator != (const GLibString & str) {
 			return strcmp( m_str, str.c_str() ) != 0;
 		}
 
 		//========================================================
-		int Len() const { return m_len; }
+		inline int Len() const { return m_len; }
 
 		//========================================================
-		const char * c_str() const { return m_str; }
+		inline const char * c_str() const { return m_str; }
 
 		//========================================================
-		char operator[] (const int index) {
+		inline char operator[] (const int index) {
 			glibassert( index >= 0 && index < Len() );
 			return m_str[ index ];
 		}
+
+		//========================================================
+		inline GLibString & operator += ( const GLibString & rhs ) {
+			return ( *this + rhs );
+		}
+
 
 	private:
 		char * m_str;
@@ -115,10 +121,6 @@ namespace glib {
 #endif
 		}
 	};
-
-	//inline GLibString & operator += ( GLibString & lhs, const GLibString & rhs ) {
-	//	return lhs + rhs;
-	//}
 
 }	// namespace glib
 

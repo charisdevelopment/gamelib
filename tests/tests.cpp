@@ -41,7 +41,7 @@ void StringTests() {
 	glibassert( construct == "hello world" );
 	glibassert( construct != "hello" );
 
-//	construct += " my name is Rom";
+	construct += " my name is Rom";
 	glibassert(construct == "hello world my name is Rom" );
 }
 
