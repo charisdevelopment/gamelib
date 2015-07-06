@@ -9,7 +9,7 @@
 namespace glib {
 	/* 
 		TODO: 
-		1. Assignment operator.
+		X. Assignment operator.
 		X. Copy constructor
 		3. += operator, + operator between char *, GLibString
 		4. Conversion from int / char / float / bool
@@ -19,7 +19,7 @@ namespace glib {
 	class GLibString {
 	public:
 		//========================================================
-		GLibString() : m_str(nullptr), m_len(0) {}
+		GLibString() : m_str( nullptr ), m_len(0) {}
 
 		//========================================================
 		GLibString( const char * s ) {
@@ -51,6 +51,12 @@ namespace glib {
 		}
 
 		//========================================================
+		GLibString( const float f ) {
+			// TODO: Implement.
+			glibassert( false );
+		}
+
+		//========================================================
 		GLibString( const GLibString & other ) : GLibString( other.c_str() ) {}
 
 		//========================================================
@@ -75,6 +81,42 @@ namespace glib {
 			m_str = newStr;
 			m_len = newLen;
 			return *this;
+		}
+
+		//========================================================
+		void operator = ( const GLibString & str ) {
+			// optimize against heap fragmentation when possible.
+			// otherwise, 
+			if ( m_len < str.m_len ) {
+				delete[] m_str;
+
+				m_len = str.m_len;
+				m_str = new char[ str.m_len + 1 ];
+			}
+
+#if defined (_MSC_VER)
+			strcpy_s( m_str, m_len + 1, str.m_str );
+#else
+			strcpy( m_str, str.m_str );
+#endif
+		}
+
+		//========================================================
+		void operator = ( const char * cstr ) {
+			int len = strlen( cstr );
+
+			if ( m_len < len ) {
+				delete[] m_str;
+
+				m_len = len;
+				m_str = new char[ m_len + 1 ];
+			}
+
+#if defined (_MSC_VER)
+			strcpy_s( m_str, m_len + 1, cstr );
+#else
+			strcpy( m_str, cstr );
+#endif
 		}
 
 		//========================================================
@@ -103,7 +145,6 @@ namespace glib {
 		inline GLibString & operator += ( const GLibString & rhs ) {
 			return ( *this + rhs );
 		}
-
 
 	private:
 		char * m_str;

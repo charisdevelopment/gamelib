@@ -43,6 +43,12 @@ void StringTests() {
 
 	construct += " my name is Rom";
 	glibassert(construct == "hello world my name is Rom" );
+
+	construct = "from a cstr";
+	glibassert( construct == "from a cstr" );
+
+	construct = glib::GLibString( "123456789101112131415161718192021222324252627" );
+	glibassert( construct == "123456789101112131415161718192021222324252627" );
 }
 
 // Main
