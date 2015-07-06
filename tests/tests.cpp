@@ -4,34 +4,34 @@
 #include "stdafx.h"
 #include "../gamelib/gamelib.h"
 
-// ArrayTests
-void ArrayTests() {
-	glib::GLibArray< int > myArray;
+// ListTests
+void ListTests() {
+	glib::GLibList< int > myList;
 
-	myArray.Append( 10 );
-	myArray.Append( 2 );
-	glibassert( myArray.Count() == 2 );
-	glibassert(myArray[0] == 10);
-	glibassert(myArray[1] == 2);
+	myList.Append( 10 );
+	myList.Append( 2 );
+	glibassert( myList.Count() == 2 );
+	glibassert( myList[0] == 10 );
+	glibassert( myList[1] == 2 );
 
-	myArray.Pop();
-	glibassert(myArray.Count() == 1);
-	glibassert(myArray[0] == 10);
+	myList.Pop();
+	glibassert( myList.Count() == 1 );
+	glibassert( myList[0] == 10 );
 
-	myArray.Pop();
-	glibassert(myArray.Count() == 0);
+	myList.Pop();
+	glibassert( myList.Count() == 0 );
 
-	myArray.Append( 100 );
-	myArray.Append( 50 );
-	myArray.Append( 20 );
-	glibassert(myArray.Count() == 3);
+	myList.Append( 100 );
+	myList.Append( 50 );
+	myList.Append( 20 );
+	glibassert( myList.Count() == 3 );
 
-	myArray.Remove(1);
-	glibassert(myArray.Count() == 2);
-	glibassert(myArray[1] == 20);
+	myList.Remove( 1 );
+	glibassert( myList.Count() == 2 );
+	glibassert( myList[1] == 20 );
 }
 
-// Test the string class.
+// StringTests
 void StringTests() {
 	glib::GLibString str;
 	glibassert( str.Len() == 0 );
@@ -41,13 +41,15 @@ void StringTests() {
 	glibassert( construct == "hello world" );
 	glibassert( construct != "hello" );
 
-	//construct += " my name is Rom";
+//	construct += " my name is Rom";
 	glibassert(construct == "hello world my name is Rom" );
 }
 
 // Main
-int _tmain(int argc, _TCHAR* argv[]) {
-	ArrayTests();
+int _tmain( int argc, _TCHAR* argv[] ) {
+	glib::Log( "Starting tests.\n" );
+
+	ListTests();
 	StringTests();
 	return 0;
 }

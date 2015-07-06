@@ -143,7 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="array.h" />
+    <ClInclude Include="list.h" />
     <ClInclude Include="assert.h" />
     <ClInclude Include="gamelib.h" />
     <ClInclude Include="log.h" />

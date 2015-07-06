@@ -3,20 +3,19 @@
 
 namespace glib {
 	//=========================================
-	// GLibArray
-	// Actual templated class that our game code will use.
+	// GlibList
 	//=========================================
 	template <typename T >
-	class GLibArray {
+	class GLibList {
 	public:
 		//======================================
-		GLibArray() : m_ptr(nullptr),
+		GLibList() : m_ptr(nullptr),
 			m_itemCount(0),
 			m_allocCount(0) {
 		}
 
 		//======================================
-		~GLibArray() {
+		~GLibList() {
 			if (m_ptr != nullptr) {
 				delete[] m_ptr;
 			}
@@ -53,7 +52,7 @@ namespace glib {
 		//======================================
 		// Remove
 		//======================================
-		void Remove(const uint index) {
+		void Remove( const uint index ) {
 			glibassert( index >= 0 && index < m_itemCount );
 
 			// special case - "pop"
@@ -74,7 +73,7 @@ namespace glib {
 		//======================================
 		// Append
 		//======================================
-		void Append(const T & item) {
+		void Append( const T & item ) {
 			if ( m_allocCount <= m_itemCount ) {
 				// resize the array
 				m_allocCount = NextSize();
