@@ -53,6 +53,9 @@
     <ClCompile Include="assert.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="threads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="gamelib.rc">

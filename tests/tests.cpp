@@ -1,54 +1,70 @@
-// tests.cpp : Defines the entry point for the console application.
-//
+// Validation tests for the gamelib library. 
+// Ideally these should be implemented in some sort of testing framework. For now however, they are implemented via assertions and exception handling.
 
 #include "stdafx.h"
 #include "../gamelib/gamelib.h"
 
 // ListTests
 void ListTests() {
-	glib::GLibList< int > myList;
+	glib::List< int > myList;
 
 	myList.Append( 10 );
 	myList.Append( 2 );
-	glibassert( myList.Count() == 2 );
-	glibassert( myList[0] == 10 );
-	glibassert( myList[1] == 2 );
+	glibAssert( myList.Count() == 2 );
+	glibAssert( myList[0] == 10 );
+	glibAssert( myList[1] == 2 );
 
 	myList.Pop();
-	glibassert( myList.Count() == 1 );
-	glibassert( myList[0] == 10 );
+	glibAssert( myList.Count() == 1 );
+	glibAssert( myList[0] == 10 );
 
 	myList.Pop();
-	glibassert( myList.Count() == 0 );
+	glibAssert( myList.Count() == 0 );
 
 	myList.Append( 100 );
 	myList.Append( 50 );
 	myList.Append( 20 );
-	glibassert( myList.Count() == 3 );
+	glibAssert( myList.Count() == 3 );
 
 	myList.Remove( 1 );
-	glibassert( myList.Count() == 2 );
-	glibassert( myList[1] == 20 );
+	glibAssert( myList.Count() == 2 );
+	glibAssert( myList[1] == 20 );
+
+	// Test static lists.
+	glib::StaticList< int, 2 > staticList;
+	staticList.Append( 100 );
+	staticList.Append( 50 );
+
+	glibAssert( staticList.Count() == 2 );
+	bool staticListGrowException = false;
+	try {
+		staticList.Append( 100 );
+	} catch ( const glib::InvalidListOperationException & e ) {
+		staticListGrowException = true;
+		glibAssert( e.GetClass() == glib::InvalidListOperationException::ExceptionClass::E_CANNOT_RESIZE_STATIC_LIST );
+	}
+
+	glibAssert( staticListGrowException == true );
 }
 
 // StringTests
 void StringTests() {
-	glib::GLibString str;
-	glibassert( str.Len() == 0 );
+	glib::String str;
+	glibAssert( str.Len() == 0 );
 
-	glib::GLibString construct( "hello world" );
-	glibassert( construct.Len() == 11 );
-	glibassert( construct == "hello world" );
-	glibassert( construct != "hello" );
+	glib::String construct( "hello world" );
+	glibAssert( construct.Len() == 11 );
+	glibAssert( construct == "hello world" );
+	glibAssert( construct != "hello" );
 
 	construct += " my name is Rom";
-	glibassert(construct == "hello world my name is Rom" );
+	glibAssert(construct == "hello world my name is Rom" );
 
 	construct = "from a cstr";
-	glibassert( construct == "from a cstr" );
+	glibAssert( construct == "from a cstr" );
 
-	construct = glib::GLibString( "123456789101112131415161718192021222324252627" );
-	glibassert( construct == "123456789101112131415161718192021222324252627" );
+	construct = glib::String( "123456789101112131415161718192021222324252627" );
+	glibAssert( construct == "123456789101112131415161718192021222324252627" );
 }
 
 // Main

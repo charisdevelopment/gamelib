@@ -15,14 +15,14 @@ namespace glib {
 		4. Conversion from int / char / float / bool
 	*/
 
-	// GlibString
-	class GLibString {
+	// glib::String
+	class String {
 	public:
 		//========================================================
-		GLibString() : m_str( nullptr ), m_len(0) {}
+		String() : m_str( nullptr ), m_len(0) {}
 
 		//========================================================
-		GLibString( const char * s ) {
+		String( const char * s ) {
 			m_len = strlen( s );
 			m_str = new char[ m_len + 1 ];
 #ifndef _MSC_VER
@@ -33,14 +33,14 @@ namespace glib {
 		}
 
 		//========================================================
-		GLibString( const char c ) {
+		String( const char c ) {
 			m_len = 1;
 			m_str = new char[ m_len + 1 ];
 			m_str[ 0 ] = c;
 		}
 
 		//========================================================
-		GLibString( const int i ) {
+		String( const int i ) {
 			char buffer[ 32 ];
 #ifndef _MSC_VER
 			_itoa( i, buffer, 10 );
@@ -51,22 +51,22 @@ namespace glib {
 		}
 
 		//========================================================
-		GLibString( const float f ) {
+		String( const float f ) {
 			// TODO: Implement.
-			glibassert( false );
+			glibAssert( false );
 		}
 
 		//========================================================
-		GLibString( const GLibString & other ) : GLibString( other.c_str() ) {}
+		String( const String & other ) : String( other.c_str() ) {}
 
 		//========================================================
-		~GLibString() {
+		~String() {
 			delete[] m_str;
 		}
 
 		//========================================================
 		// operator +
-		GLibString & operator + ( const GLibString & str ) {
+		String & operator + ( const String & str ) {
 			int newLen = Len() + str.Len();
 			char * newStr = new char[ newLen + 1 ];
 #if defined (_MSC_VER )
@@ -84,7 +84,7 @@ namespace glib {
 		}
 
 		//========================================================
-		void operator = ( const GLibString & str ) {
+		void operator = ( const String & str ) {
 			// optimize against heap fragmentation when possible.
 			// otherwise, 
 			if ( m_len < str.m_len ) {
@@ -120,12 +120,12 @@ namespace glib {
 		}
 
 		//========================================================
-		inline bool operator == (const GLibString & str) {
+		inline bool operator == (const String & str) {
 			return strcmp( m_str, str.c_str() ) == 0;
 		}
 
 		//========================================================
-		inline bool operator != (const GLibString & str) {
+		inline bool operator != (const String & str) {
 			return strcmp( m_str, str.c_str() ) != 0;
 		}
 
@@ -137,12 +137,12 @@ namespace glib {
 
 		//========================================================
 		inline char operator[] (const int index) {
-			glibassert( index >= 0 && index < Len() );
+			glibAssert( index >= 0 && index < Len() );
 			return m_str[ index ];
 		}
 
 		//========================================================
-		inline GLibString & operator += ( const GLibString & rhs ) {
+		inline String & operator += ( const String & rhs ) {
 			return ( *this + rhs );
 		}
 

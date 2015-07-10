@@ -157,6 +157,7 @@
     <ClCompile Include="assert.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="threads.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="gamelib.rc" />

@@ -18,7 +18,10 @@
 // ----------------------------------------------
 // X. Integral types (see: types.h)
 // X. String types (see: string.h)
-// 3. Container types (Array, Dictionary, Set)
+// 3. Container types 
+//	a. List
+//	b. Map (use stl?)
+//	c. Set (use stl?)
 // 4. Vector types
 // 5. Matrix types
 // 6. Basic Math Library (Abs, Sqrt, Trig, etc.)
@@ -29,7 +32,7 @@
 
 // Threading solution
 // ----------------------------------------------
-// 1. Threading primitives
+// 1. Threading primitives => wrap/use std::thread internally.
 
 // Job based system.
 //------------------
@@ -37,7 +40,7 @@
 
 // Unit testing
 //------------------
-// 1. Use a Unit Test framework that is cross compatible.
+// 1. Use a Unit Test framework that is cross compatible. For now just use assert.
 
 // Build system.
 //---------------
