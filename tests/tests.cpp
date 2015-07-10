@@ -30,6 +30,10 @@ void ListTests() {
 	glibAssert( myList.Count() == 2 );
 	glibAssert( myList[1] == 20 );
 
+	glib::List< int > myCopiedList( myList );
+	glibAssert( myCopiedList.Count() == 2 );
+	glibAssert( myCopiedList[ 1 ] == 20 );
+
 	// Test static lists.
 	glib::StaticList< int, 2 > staticList;
 	staticList.Append( 100 );
@@ -71,7 +75,13 @@ void StringTests() {
 int _tmain( int argc, _TCHAR* argv[] ) {
 	glib::Log( "Starting tests.\n" );
 
-	ListTests();
-	StringTests();
+	try {
+		ListTests();
+		StringTests();
+	} catch ( ... ) {
+		// Some exception trickled up all the way up here. Note this and bail.
+		glib::Error( "Unhandled exception!\n" );
+	}
+
 	return 0;
 }

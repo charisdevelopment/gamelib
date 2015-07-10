@@ -46,28 +46,19 @@ namespace glib {
 		}
 
 		//-----------------------------------------
+		// Copy Constructor
 		explicit List( const List< _elementType > & other ) {
-			// Free the current list.
-			if ( other.m_itemCount > this->m_itemCount ) {
-				delete[] m_ptr;
-				m_allocCount = other->m_itemCount;
-				m_itemCount = m_allocCount;
-				m_ptr = new _elementType[ m_allocCount ];
-			} else {
-				// still have to call the destructor for all objects in our array.
-				for ( uint i = 0; i < m_itemCount ) {
-					m_ptr[ i ].~_elementType();
-				}
+			m_allocCount = other.m_itemCount;
+			m_itemCount = m_allocCount;
+			m_ptr = new _elementType[ m_allocCount ];
 
-				m_itemCount = other.m_itemCount;
-			}
-
-			for ( uint i = 0; i < m_itemCount; i++ ) {
+			for ( uint i = 0; i < m_itemCount; ++i ) {
 				m_ptr[ i ] = other.m_ptr[ i ];
 			}
 		}
 
 		//-----------------------------------------
+		// ~List()
 		~List() {
 			if ( !m_isStatic && m_ptr != nullptr ) {
 				delete[] m_ptr;
@@ -143,7 +134,7 @@ namespace glib {
 				m_itemCount = other.m_itemCount;
 			}
 
-			for ( uint i = 0; i < m_itemCount; i++ ) {
+			for ( uint i = 0; i < m_itemCount; ++i ) {
 				m_ptr[ i ] = other.m_ptr[ i ];
 			}
 

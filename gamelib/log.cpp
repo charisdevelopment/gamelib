@@ -34,7 +34,7 @@ namespace glib {
 	void Error( const String & str ) {
 		InternalLog( String( "Error: " ) + str );
 #ifdef _MSC_VER
-			DebugBreak();
+		// DebugBreak();
 #else
 #error Implement Error for this platform!
 #endif
