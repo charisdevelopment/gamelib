@@ -22,7 +22,6 @@ namespace glib {
 			m_message( o.m_message ),
 			m_class( o.m_class ) {}
 
-
 		const String & GetMessage() const { return m_message; }
 		ExceptionClass GetClass() const { return m_class; }
 
@@ -34,6 +33,7 @@ namespace glib {
 	//-----------------------------------------
 	// glib::List
 	//-----------------------------------------
+	// Need functions for: Sort, Slice, Find
 	template< typename _elementType  >
 	class List {
 	public:
@@ -47,14 +47,14 @@ namespace glib {
 
 		//-----------------------------------------
 		// Copy Constructor
-		explicit List( const List< _elementType > & other ) {
-			m_allocCount = other.m_itemCount;
-			m_itemCount = m_allocCount;
-			m_ptr = new _elementType[ m_allocCount ];
+		explicit List( const List< _elementType > & other ):
+			m_allocCount( other.m_allocCount ),
+			m_itemCount( other.m_itemCount ) {
+				m_ptr = new _elementType[ m_allocCount ];
 
-			for ( uint i = 0; i < m_itemCount; ++i ) {
-				m_ptr[ i ] = other.m_ptr[ i ];
-			}
+				for ( uint i = 0; i < m_itemCount; ++i ) {
+					m_ptr[ i ] = other.m_ptr[ i ];
+				}
 		}
 
 		//-----------------------------------------
@@ -146,7 +146,7 @@ namespace glib {
 
 		//-----------------------------------------
 		// Append
-		// Can throw: glib::InvalidListOperationException
+		// Can throw - glib::InvalidListOperationException
 		void Append( const _elementType & item ) {
 			if ( m_allocCount <= m_itemCount ) {
 				if ( m_isStatic ) {
