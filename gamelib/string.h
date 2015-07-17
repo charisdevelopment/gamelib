@@ -23,7 +23,7 @@ namespace glib {
 
 		//========================================================
 		String( const char * s ) {
-			m_len = strlen( s );
+			m_len = static_cast< int >( strlen( s ) );
 			m_str = new char[ m_len + 1 ];
 #ifndef _MSC_VER
 			strcpy( m_str, s );
@@ -103,7 +103,7 @@ namespace glib {
 
 		//========================================================
 		void operator = ( const char * cstr ) {
-			int len = strlen( cstr );
+			int len = static_cast< int >( strlen( cstr ) );
 
 			if ( m_len < len ) {
 				delete[] m_str;
@@ -153,7 +153,7 @@ namespace glib {
 		//========================================================
 		// know what you are doing before calling this function! Doesn't clean up the internal array.
 		void _AssignFromCStr(const char * str) {
-			m_len = strlen( str );
+			m_len = static_cast< int >( strlen( str ) );
 			m_str = new char[ m_len + 1 ];
 #if defined( _MSC_VER )
 			strcpy_s( m_str, m_len + 1, str );

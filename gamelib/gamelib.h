@@ -3,6 +3,7 @@
 
 #include "assert.h"
 #include "types.h"
+#include "memory.h"
 #include "list.h"
 #include "string.h"
 #include "log.h"

@@ -30,6 +30,9 @@ namespace glib {
 		ExceptionClass	m_class;
 	};
 
+	// Add Resize (Condense)
+	// SetSize (to fix it to a certain size to avoid dynamic memory allocation sizing)
+
 	//-----------------------------------------
 	// glib::List
 	//-----------------------------------------
@@ -107,6 +110,18 @@ namespace glib {
 			}
 
 			--m_itemCount;
+		}
+
+		//-----------------------------------------
+		// PreAllocate
+		// Allocates the number of elements specified.
+		void PreAllocate( int count ) {
+		}
+
+		//-----------------------------------------
+		// Condense
+		// Fits the array to fit around the 
+		void Condense() {
 		}
 
 		//-----------------------------------------
